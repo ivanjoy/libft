@@ -1,6 +1,6 @@
-NAME = <filename>
+NAME = ft_strcmpTest
 
-SRC = main.c <other files>.c
+SRC = main.c ft_strcmp.c
 
 all: $(NAME)
 

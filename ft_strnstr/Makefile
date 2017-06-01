@@ -1,6 +1,6 @@
-NAME = <filename>
+NAME = ft_strnstrTest
 
-SRC = main.c <other files>.c
+SRC = main.c ft_strnstr.c
 
 all: $(NAME)
 
