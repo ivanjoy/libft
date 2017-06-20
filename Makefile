@@ -10,9 +10,9 @@ $(NAME):
 	ranlib libft.a
 
 clean:
-	rm -rf $(NAME)
+	rm -rf $(SRC:.c=.o)
 
 fclean: clean
-	rm -rf $(SRC:.c=.o)
+	rm -rf $(NAME)
 
 re: fclean all
