@@ -1,6 +1,6 @@
 #include <string.h>
 
-char	*strncpy(char *dst, const char *src, size_t len)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
 	unsigned int i;
 
@@ -10,5 +10,6 @@ char	*strncpy(char *dst, const char *src, size_t len)
 		dst[i] = src[i];
 		i++;
 	}
+	dst[i] = '\0';
 	return (dst);
 }

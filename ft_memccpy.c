@@ -20,10 +20,10 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		*((char*)(dst + i)) = *((char*)(src + i));
-		if (*((char*)(src + i)) == ((unsigned char)(c)))
+		*((unsigned char*)(dst + i)) = *((unsigned char*)(src + i));
+		if (*((unsigned char*)(src + i)) == ((unsigned char)(c)))
 		{
-			*((char *)(dst + i + 1)) = '\0';
+			*((unsigned char *)(dst + i + 1)) = '\0';
 			return (dst + i + 1);
 		}
 		i++;

@@ -36,7 +36,7 @@ char		*ft_itoa(int n)
 	unsigned int	j;
 	char			*result;
 
-	i = 0;
+	i = 1;
 	j = 0;
 	if (n == -2147483648)
 		return ("-2147483648");
