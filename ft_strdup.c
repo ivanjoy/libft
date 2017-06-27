@@ -10,25 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
-
-static unsigned int	ft_strlen(const char *s1)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (s1[i])
-		i++;
-	return (i - 1);
-}
+#include "libft.h"
 
 char				*ft_strdup(const char *s1)
 {
 	char	*s2;
 	int		i;
 
-	s2 = (char *)(malloc((ft_strlen(s1) + 1) * sizeof(s2)));
+	s2 = (char *)(malloc((ft_strlen(s1) + 1) * sizeof(char)));
 	i = 0;
 	if (s2)
 	{

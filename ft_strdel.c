@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "libft.h"
 
-void	ft_strdel(void **as)
+void	ft_strdel(char **as)
 {
-	free(*as);
-	*as = NULL;
+	ft_memdel((void**)as);
 }
