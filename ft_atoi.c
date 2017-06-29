@@ -17,6 +17,8 @@ static int	ft_numdigits(const char *str)
 	int		i;
 
 	i = 0;
+	while (*str == '0')
+		str++;
 	while (*str && ft_isdigit(*str))
 	{
 		str++;
