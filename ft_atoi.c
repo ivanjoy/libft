@@ -10,42 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_strcmp(const char *s1, const char *s2)
+#include "libft.h"
+
+static int	ft_numdigits(const char *str)
 {
-	while (*s1 && *s2)
+	int		i;
+
+	i = 0;
+	while (*str && ft_isdigit(*str))
 	{
-		if (*s1 != *s2)
-			return (*s1 - *s2);
-		s1++;
-		s2++;
+		str++;
+		i++;
 	}
-	return (0);
+	return (i);
 }
 
 int			ft_atoi(const char *str)
 {
-	int		i;
+	long	i;
 	int		isneg;
 
 	i = 0;
-	isneg = 1;
-	while (*str == '\f' || *str == '\t' || *str == ' '
-	|| *str == '\n' || *str == '\v' || *str == '\r')
+	isneg = 0;
+	while ((9 <= *str && *str <= 13) || *str == 32)
 		str++;
-	if (ft_strcmp(str, "-2147483648") == 0)
+	if (*str == '+')
+		str++;
+	else if (*str == '-')
+	{
+		isneg = 1;
+		str++;
+	}
+	if (ft_numdigits(str) >= 11)
+		return (isneg - 1);
+	if (ft_strcmp("2147483648", str) == 0 && isneg)
 		return (-2147483648);
-	if (*str == '-')
-	{
-		isneg = -1;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		i *= 10;
-		i += *str - 48;
-		str++;
-	}
-	return (i * isneg);
+	while (*str != '\0' && ft_isdigit(*str))
+		i = i * 10 + (*str++ - '0');
+	if (isneg)
+		return ((int)-i);
+	else
+		return ((int)i);
 }

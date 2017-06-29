@@ -47,6 +47,8 @@ char				*ft_strtrim(char const *s)
 	unsigned int	size;
 	char			*result;
 
+	if (s == NULL)
+		return (NULL);
 	i = 0;
 	size = ft_trimmedsize(s);
 	result = (char *)malloc((size + 1) * sizeof(char));

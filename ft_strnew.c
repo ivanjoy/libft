@@ -19,10 +19,12 @@ char	*ft_strnew(size_t size)
 	size_t	i;
 
 	i = 0;
-	string = (char *)malloc(size);
+	if (size == 0)
+		return (NULL);
+	string = (char *)malloc(size + 1);
 	if (string == NULL)
 		return (string);
-	while (i < size)
+	while (i <= size)
 	{
 		string[i] = '\0';
 		i++;

@@ -29,6 +29,8 @@ char				*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 	unsigned int	i;
 	unsigned int	j;
 
+	if (s == NULL || f == NULL)
+		return (NULL);
 	i = ft_strlen(s);
 	j = 0;
 	result = (char *)malloc(i + 1);

@@ -10,29 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-static void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+#include "libft.h"
 
 void		ft_putnbr(int n)
 {
 	int		i;
 
-	i = n;
 	if (n == -2147483648)
 	{
 		ft_putchar('-');
 		ft_putchar('2');
-		i = 147483648;
+		n = 147483648;
 	}
 	if (n < 0)
 	{
 		ft_putchar('-');
-		i = -n;
+		n *= -1;
 	}
+	i = n;
 	if (i >= 10)
 	{
 		ft_putnbr(i / 10);

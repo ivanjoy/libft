@@ -1,60 +1,69 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ijoy <marvin@42.fr>                        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/14 17:18:22 by ijoy              #+#    #+#             */
-/*   Updated: 2017/06/14 17:20:55 by ijoy             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "libft.h"
 
-#include <stdlib.h>
-#include <string.h>
-
-static int	ft_powx(int base, int exp)
+static char		*ft_strrev(char *str)
 {
+	char	*result;
 	int		i;
-	int		num;
+	int		f;
 
 	i = 0;
-	num = 1;
-	if (exp == 0)
-		return (1);
-	while (i < exp)
-	{
-		num *= base;
-		i++;
-	}
-	return (num);
+	if (str == NULL)
+		return (NULL);
+	f = ft_strlen(str);
+	result = (char*)malloc((f + 1) * sizeof(char*));
+	if (result == NULL)
+		return (NULL);
+	result[f--] = '\0';
+	while (str[i])
+		result[f--] = str[i++];
+	free(str);
+	return (result);
 }
 
-char		*ft_itoa(int n)
+static int		ft_countchars(int n)
+{
+	int		i;
+	i = 0;
+	if (n == 0)
+		i++;
+	else if (n < 0)
+		i++;
+	else
+	{
+		while (n > 10)
+		{
+			i++;
+			n /= 10;
+		}
+	}
+	return (i);
+}
+
+char			*ft_itoa(int n)
 {
 	int				i;
-	unsigned int	j;
-	char			*result;
+	unsigned int	f;
+	int				neg;
+	char			*buf;
 
-	i = 1;
-	j = 0;
-	if (n == -2147483648)
-		return ("-2147483648");
-	while (n / (ft_powx(10, i)))
-		i++;
-	if (n < 0)
+	buf = ft_strnew(ft_countchars(n));
+	if (buf == NULL)
+		return (NULL);
+	f = n;
+	if ((neg = n) < 0)
+		f = -n;
+	i = 0;
+	if (f == 0)
+		buf[i++] = '0';
+	while (f > 0)
 	{
-		j++;
-		n *= -1;
+		buf[i++] = f % 10 + '0';
+		f /= 10;
 	}
-	result = (char *)malloc((i + j + 1) * sizeof(char));
-	result[i-- + j] = '\0';
-	if (j == 1)
-		result[0] = '-';
-	while (i >= 0)
-	{
-		result[j++] = (int)(n / ft_powx(10, i)) + '0';
-		n %= ft_powx(10, i--);
-	}
-	return (result);
+	if (neg < 0)
+		buf[i++] = '-';
+	buf[i] = '\0';
+	buf = ft_strrev(buf);
+	return (buf);
+
 }

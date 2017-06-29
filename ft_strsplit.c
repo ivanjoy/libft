@@ -1,99 +1,69 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ijoy <marvin@42.fr>                        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/13 18:45:13 by ijoy              #+#    #+#             */
-/*   Updated: 2017/06/13 19:46:58 by ijoy             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "libft.h"
 
-#include <string.h>
-#include <stdlib.h>
-
-static unsigned int	ft_numwords(char const *s, char c)
+static const char		*ft_strfindnext(const char *s, char c, int next)
 {
-	unsigned int	i;
-	unsigned int	j;
+	if (next)
+		while (*s != '\0' && *s == c)
+			s++;
+	else
+		while (*s != '\0' && *s != c)
+			s++;
+	return (s);
+}
 
-	i = 1;
-	j = 0;
-	while (*s)
+static int				ft_strcountsplits(const char *s, char sep)
+{
+	int			i;
+
+	i = 0;
+	while (*s != '\0')
 	{
-		if (*s != c && i == 1)
+		s = ft_strfindnext(s, sep, 1);
+		if (*s != '\0')
 		{
-			j++;
-			i = 0;
-		}
-		else if (*s == c)
-			i = 1;
-		s++;
-	}
-	return (j);
-}
-
-static char			*ft_getword(char const *s, char c)
-{
-	unsigned int	i;
-	unsigned int	size;
-	char			*word;
-
-	i = 0;
-	size = 0;
-	while (s[size] != c && s[size])
-		size++;
-	word = (char *)malloc((size + 1) * sizeof(char));
-	if (word == NULL)
-		return (word);
-	word[size] = '\0';
-	while (i < size)
-	{
-		word[i] = s[i];
-		i++;
-	}
-	return (word);
-}
-
-static unsigned int	ft_strlen(char const *s)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (*s)
-	{
-		s++;
-		i++;
-	}
-	return (i);
-}
-
-char				**ft_strsplit(char const *s, char c)
-{
-	unsigned int	i;
-	unsigned int	j;
-	char			**matrix;
-
-	i = ft_numwords(s, c);
-	matrix = (char **)malloc((i + 1) * sizeof(char **));
-	if (matrix == NULL)
-		return (matrix);
-	matrix[i] = (char *)malloc(1 * sizeof(char *));
-	matrix[i][0] = '\0';
-	i = 0;
-	j = 0;
-	while (s[j])
-	{
-		if (s[j] != c)
-		{
-			matrix[i] = ft_getword(s + j, c);
-			if (matrix[i] == NULL)
-				return (NULL);
-			j += ft_strlen(matrix[i]);
 			i++;
+			s = ft_strfindnext(s, sep, 0);
 		}
-		j++;
 	}
-	return (matrix);
+	return (i + 1);
+}
+
+static char				**ft_tabledel(char **ret, int n)
+{
+	int			i;
+
+	i = 0;
+	while (i < n)
+		free(ret[i]);
+	free(ret);
+	return (NULL);
+}
+
+char					**ft_strsplit(char const *str, char c)
+{
+	char		**ret;
+	int			i;
+	const char	*next;
+
+	if (str == NULL)
+		return (NULL);
+	ret = (char**)malloc(ft_strcountsplits(str, c) * sizeof(char*));
+	if (ret == NULL)
+		return (NULL);
+	i = 0;
+	while (*str != '\0')
+	{
+		str = ft_strfindnext(str, c, 1);
+		if (*str != '\0')
+		{
+			next = ft_strfindnext(str, c, 0);
+			ret[i] = ft_strsub(str, 0, next - str);
+			if (ret[i] == NULL)
+				return (ft_tabledel(ret, i));
+			i++;
+			str = next;
+		}
+	}
+	ret[i] = NULL;
+	return (ret);
 }

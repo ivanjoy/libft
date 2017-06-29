@@ -29,6 +29,8 @@ char				*ft_strmap(char const *s, char (*f)(char))
 	unsigned int	i;
 	unsigned int	j;
 
+	if (s == NULL || f == NULL)
+		return (NULL);
 	i = ft_strlen(s);
 	j = 0;
 	str = (char *)malloc(i + 1);

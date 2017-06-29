@@ -30,6 +30,8 @@ char				*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	j;
 	char			*result;
 
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
 	size = ft_strlen(s1) + ft_strlen(s2);
 	result = (char *)malloc((size + 1) * sizeof(char));
 	if (result == NULL)
