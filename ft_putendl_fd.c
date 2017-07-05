@@ -6,7 +6,7 @@
 /*   By: ijoy <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 18:19:42 by ijoy              #+#    #+#             */
-/*   Updated: 2017/06/14 18:21:18 by ijoy             ###   ########.fr       */
+/*   Updated: 2017/07/05 14:22:43 by ijoy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_putendl_fd(char const *s, int fd)
 {
 	if (s == NULL)
-		return;
+		return ;
 	while (*s)
 		write(fd, s++, 1);
 	write(fd, "\n", 1);

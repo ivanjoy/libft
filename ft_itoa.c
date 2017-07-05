@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijoy <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/05 14:06:18 by ijoy              #+#    #+#             */
+/*   Updated: 2017/07/05 14:07:24 by ijoy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static char		*ft_strrev(char *str)
@@ -23,6 +35,7 @@ static char		*ft_strrev(char *str)
 static int		ft_countchars(int n)
 {
 	int		i;
+
 	i = 0;
 	if (n == 0)
 		i++;
@@ -65,5 +78,4 @@ char			*ft_itoa(int n)
 	buf[i] = '\0';
 	buf = ft_strrev(buf);
 	return (buf);
-
 }
